@@ -60,7 +60,7 @@
             $result = flashMessage("Email is already taken, please try another one...");
         } elseif (empty($form_errors)) {
 
-            hashed_password = password_hash($wachtwoord, PASSWORD_DEFAULT);$
+            $hashed_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
             try {
                 $sqlInsert = "INSERT INTO particulier(geslacht, titel, geboortedatum, naam, tussenvoegsel, achternaam, adres, leerlingnummer, huisnummer, postcode, plaats, land, telefoonnummer, mobielnummer, emailadres, wachtwoord)
                     VALUES(:geslacht, :titel, :geboortedatum, :naam, :tussenvoegsel, :achternaam, :adres, :huisnummer, :postcode, :plaats, :leerlingnummer, :land, :telefoonnummer, :mobielnummer, :emailadres, :wachtwoord)";
