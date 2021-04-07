@@ -17,8 +17,11 @@
         <input type="text" name="UserInfo" data-role="keypad" placeholder="BankCode + Account Nummer" data-keys="INGB ,ABNA , RABO , ASNB , NL, 0,1,2,3,4,5,6,7,8,9, , , " data-key-length="18">
         <input type="password" name="Pin" data-role="keypad" placeholder="Enter pin" data-key-length="4">
         <input type="button" name="login" id="login" placeholder="Login" value="Login">
-        <button name="toRegister" id="toRegister">Registreren</button>
+        
     </form>
+    <br>
+    <button name="toRegister" id="toRegister">Naar Registreren</button>
+
 </div>
 
 <br>
@@ -29,40 +32,44 @@
         <input type="text" name="fullName" placeholder="Full name">
         <input type="text" name="bankID" placeholder="Bank ID">
         <select name="dropdownie">
+        <option value="" selected disabled hidden>Kies bank</option>
         <option name="INGB">ING</option>
         <option name="ABNA">ABN-Amro</option>
         <option name="RABO">RABO BANK</option>
         <option name="ASN">ASN</option>
         <option name="NB">NederlandseBanken</option>      
         </select>
-        <input type="button" name="register" placeholder="Register" value="Register">
-        <button name="toLogin" id="toLogin">Login</button>
+        <input type="button" name="register" id="register" placeholder="Register" value="Register">
+
     </form>
+    <br>
+    <button name="toLogin" id="toLogin">Naar Login</button>
 </div>
 
 <!-- . IS NAAM -->
 <!-- # IS ID -->
 	
     <!-- Keypad script -->
-<script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
 
 </body>
 </html>
-
+<script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
-$('.toRegister').on('click', function(e){
-    $("#login_form_div").css("display", "none");
-    $("#registreren_form_div").css("display", "block");
+$('#toRegister').on('click', function(){
+    $("#login_form_div").hide();
+    $("#registreren_form_div").show();
+    console.log("hello");
 })
 
-$('.toLogin').on('click', function(e){
-    $("#registreren_form_div").css("display", "none");
-    $("#login_form_div").css("display", "block");
+$('#toLogin').on('click', function(e){
+    $("#registreren_form_div").hide();
+    $("#login_form_div").show();
 })
 
-// Registreren
+
+
 $('.register').on('click', function(e){
 
     var myForm = new FormData(this);
@@ -100,5 +107,6 @@ $('.login').on('click', function(e){
 </script>
 
 <?php
+?>
 
 

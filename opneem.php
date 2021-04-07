@@ -15,32 +15,34 @@
 
 <br>
 
-<form action="" method="POST" name="loginForm">
-        <input type="text" id="WithdrawPlace" name="WithdrawHolder">
-        
-</form>
+  <form action="" method="POST" name="loginForm">
+    <input type="text" id="WithdrawPlace" name="WithdrawHolder">
+  </form>
 
 <br>
 
-<div id="">
-		  
-          <button id="ten" class="controlButton clickable" data-state="10">10</button>
-  
-          <button id="twenty" class="controlButton clickable" data-state="20">20</button>
-  
-          <button id="fifty" class="controlButton clickable" data-state="50">50</button>
-  
-          <button id="ahundo" class="controlButton clickable" data-state="100">100</button>
+  <div id="buttons"> 
+    <button id="ten" class="controlButton clickable" data-state="10">10</button>
 
-          <br><br>
-  
-          <button id="withdraw" class="controlButton clickable" data-state="withdraw">Withdraw</button>
+    <button id="twenty" class="controlButton clickable" data-state="20">20</button>
 
-          <button id="cur_balance" class="controlButton clickable" data-state="balance">Current Balance</button>
-      </div>
+    <button id="fifty" class="controlButton clickable" data-state="50">50</button>
+
+    <button id="ahundo" class="controlButton clickable" data-state="100">100</button>
+    <br><br>
+
+    <button id="withdraw" class="controlButton clickable" data-state="withdraw">Withdraw</button>
+    <button id="cur_balance" class="controlButton clickable" data-state="balance">Current Balance</button>
+
+  </div>
+  <br>
+  <a href="atm.php">
+  <button id="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
+  </a>
 <!-- . IS NAAM -->
 <!-- # IS ID -->
 	
+  <div id="DIVgif"></div>
 
 
 </body>
@@ -82,24 +84,55 @@ $('.controlButton').on('click',function() {
     break;
 
     case 'withdraw':
-    
-    $('#WithdrawPlace').val("You've withdrawn: " + input);
-   
-    function();
+    withDraw(input);
     input = 0;
     break;
 
     case 'cur_balance':
     
     break;
-
-
 }
 })
 
-function withDraw(){
+function withDraw(input){
+  $("#buttons").hide()
+  var newGif = document.createElement('img') ;
+			document.getElementById('DIVgif').appendChild(newGif);
+            newGif.id = "test";
+        $('#' + newGif.id).attr('style','height:400px;width:400px;') ;
+            
+    var tijd = 0;
+
+    if(input == 0){
+        tijd += 4000
+        newGif.src = "media/simpsons.gif";
+        $('#WithdrawPlace').val("Maybe you should actually withdraw sumfin Laddddd");
+    }else if(input == 420){
+        tijd += 4200;
+        $('#WithdrawPlace').val("You've withdrawn: €" + input + ",-");
+        newGif.src = "media/ziek.gif";
+    } else if(input >= 1000){
+        tijd += 10000;
+        $('#WithdrawPlace').val("You've withdrawn: €" + input + ",-");
+        newGif.src = "media/money-to-blow.gif";
+    } else{
+        tijd += 5000;
+        $('#WithdrawPlace').val("You've withdrawn: €" + input + ",-");
+        newGif.src = "media/normaal.gif";
+    }
+    
+    console.log(tijd);
+
+    setTimeout(function(){ 
+      // $('.notice').fadeIn().idle(2000).fadeOut('slow');
+      location.reload()
+      
+     }, tijd);
+    
+    
     
 }
+
 </script>
 
 <?php
