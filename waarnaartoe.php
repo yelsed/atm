@@ -3,23 +3,48 @@
 
 include 'connect.php';
 
+
 function registro(){
+include 'connect.php';
 
 $eigenInput = $_POST['dropdownie'];
+switch($eigenInput){
+    case 'ING':
+        $bankKeuze = 'INGB';
+        break;
+    
+    case 'ABN-Amro':
+        $bankKeuze = 'ABNA';
+        break;
 
-$randomBankID = "NL".  substr(str_shuffle("0123456789"), 0, 2) . " " . $eigenInput . substr(str_shuffle("0123456789"), 0, 4) . " " . substr(str_shuffle("0123456789"), 0, 4) . " " .  substr(str_shuffle("0123456789"), 0, 2);
+    case 'RABO BANK':
+        $bankKeuze = 'RABO';
+        break;
+
+    case 'ASN':
+        $bankKeuze = 'ASNB';
+        break;
+
+    case 'NederlandseBanken':
+        $bankKeuze = 'NL';
+        break;
+
+    
+    }
+
+$randomBankID = "NL".  substr(str_shuffle("0123456789"), 0, 2) . " " . $bankKeuze . substr(str_shuffle("0123456789"), 0, 4) . " " . substr(str_shuffle("0123456789"), 0, 4) . " " .  substr(str_shuffle("0123456789"), 0, 2);
 $randomPin = substr(str_shuffle("0123456789"), 0, 4);
   
 $hashed_password = password_hash($randomPin, PASSWORD_DEFAULT);
 
     
-$stmt = $db->prepare("INSERT INTO userdata (fullName, bankID, pinCode, bankBalance ) VALUES (:fullName, :bankID, :pinCode, :BankBalance)");
+$stmt = $db->prepare("INSERT INTO userdata(fullName, bankID, pinCode) VALUES (:fullName, :bankID, :pinCode)");
 
 $stmt->bindValue(':fullName', $_POST['fullName']);
 
 $stmt->bindValue(':bankID', $randomBankID);
 
-$stmt->bindValue(':pinCode', $randomPin);
+$stmt->bindValue(':pinCode', $hashed_password);
 
 
 $stmt->execute();
@@ -60,7 +85,16 @@ else {
 
 
 
-header('Location: atm.php');
+header('Location: opneem.php');
     
 }
+
+if(isset($_POST['login'])){
+    login();
+}
+
+if(isset($_POST['register'])){
+    registro();
+}
+
 ?>

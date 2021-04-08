@@ -5,3 +5,9 @@
 #registreren_form_div{
     display: none;
 } */
+
+.container {
+    margin-top: 1em;
+    width: 500px;
+    height: 350px;
+}
