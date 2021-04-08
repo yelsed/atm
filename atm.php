@@ -11,39 +11,41 @@
 </head>
 
 <body>
-	<!-- Login -->
-<div id="login_form_div">
-    <form action="" method="POST" name="loginForm">
-        <input type="text" name="UserInfo" data-role="keypad" placeholder="BankCode + Account Nummer" data-keys="INGB ,ABNA , RABO , ASNB , NL, 0,1,2,3,4,5,6,7,8,9, , , " data-key-length="18">
-        <input type="password" name="Pin" data-role="keypad" placeholder="Enter pin" data-key-length="4">
-        <input type="button" name="login" id="login" placeholder="Login" value="Login">
-        
-    </form>
+
+<div class="container">
+        <!-- Login -->
+    <div id="login_form_div">
+        <form action="waarnaartoe.php" method="POST" name="loginForm">
+            <input type="text" name="UserInfo" data-role="keypad" data-position="bottom-right" placeholder="BankCode + Account Nummer" data-keys="INGB ,ABNA , RABO , ASNB , NL, 0,1,2,3,4,5,6,7,8,9, , , " data-key-length="18">
+            <input type="password" name="Pin" data-role="keypad"  placeholder="Enter pin" data-key-length="4">
+            <button name="login" id="login" placeholder="Login" value="Login">Login</button>
+            
+        </form>
+        <br>
+        <button name="toRegister" id="toRegister">Naar Registreren</button>
+
+    </div>
+
     <br>
-    <button name="toRegister" id="toRegister">Naar Registreren</button>
 
-</div>
+        <!-- Registreren -->
+    <div id="registreren_form_div">
+        <form action="waarnaartoe.php" method="POST" name="registerForm">
+            <input type="text" name="fullName" placeholder="Full name">
+            <select name="dropdownie">
+            <option value="" selected disabled hidden>Kies bank</option>
+            <option name="INGB">ING</option>
+            <option name="ABNA">ABN-Amro</option>
+            <option name="RABO">RABO BANK</option>
+            <option name="ASN">ASN</option>
+            <option name="NB">NederlandseBanken</option>      
+            </select>
+            <button name="register" id="register" placeholder="Register" value="Register">Registreren</button>
 
-<br>
-
-    <!-- Registreren -->
-<div id="registreren_form_div">
-    <form action="" method="POST" name="registerForm">
-        <input type="text" name="fullName" placeholder="Full name">
-        <input type="text" name="bankID" placeholder="Bank ID">
-        <select name="dropdownie">
-        <option value="" selected disabled hidden>Kies bank</option>
-        <option name="INGB">ING</option>
-        <option name="ABNA">ABN-Amro</option>
-        <option name="RABO">RABO BANK</option>
-        <option name="ASN">ASN</option>
-        <option name="NB">NederlandseBanken</option>      
-        </select>
-        <input type="button" name="register" id="register" placeholder="Register" value="Register">
-
-    </form>
-    <br>
-    <button name="toLogin" id="toLogin">Naar Login</button>
+        </form>
+        <br>
+        <button name="toLogin" id="toLogin">Naar Login</button>
+    </div>
 </div>
 
 <!-- . IS NAAM -->
@@ -57,9 +59,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
+
+$("#registreren_form_div").hide();
 $('#toRegister').on('click', function(){
-    $("#login_form_div").hide();
     $("#registreren_form_div").show();
+    $("#login_form_div").hide();
     console.log("hello");
 })
 
@@ -82,10 +86,9 @@ $('.register').on('click', function(e){
         processData:false,
         success:function(){
             console.log(data);
-            //function
         }
     });
-})
+});
 
 // Login
 $('.login').on('click', function(e){
@@ -103,7 +106,7 @@ $('.login').on('click', function(e){
             //function
         }
     });
-})
+});
 </script>
 
 <?php
