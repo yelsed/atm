@@ -1,3 +1,15 @@
+<?php
+include 'waarnaartoe.php';
+include 'begin.php';
+echo $_SESSION['id'];
+echo $_SESSION['naam'];
+echo $_SESSION['saldo'];
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +48,9 @@
 
   </div>
   <br>
-  <a href="atm.php">
+  <a href="destroy.php">
   <button id="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
-  </a>
+</a>
 <!-- . IS NAAM -->
 <!-- # IS ID -->
 	
@@ -91,6 +103,8 @@ $('.controlButton').on('click',function() {
     case 'cur_balance':
     
     break;
+
+  
 }
 })
 

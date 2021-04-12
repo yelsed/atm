@@ -1,11 +1,16 @@
+
 <?php 
 
 
 include 'connect.php';
 
 
+
+
 function registro(){
 include 'connect.php';
+include 'begin.php';
+
 
 $eigenInput = $_POST['dropdownie'];
 switch($eigenInput){
@@ -26,18 +31,24 @@ switch($eigenInput){
         break;
 
     case 'NederlandseBanken':
-        $bankKeuze = 'NL';
+        $bankKeuze = 'NLSB';
         break;
 
     
     }
 
-$randomBankID = "NL".  substr(str_shuffle("0123456789"), 0, 2) . " " . $bankKeuze . substr(str_shuffle("0123456789"), 0, 4) . " " . substr(str_shuffle("0123456789"), 0, 4) . " " .  substr(str_shuffle("0123456789"), 0, 2);
+
+
+$randomBankID = "NL".  substr(str_shuffle("0123456789"), 0, 2) . $bankKeuze . substr(str_shuffle("0123456789"), 0, 4)  . substr(str_shuffle("0123456789"), 0, 4)  .  substr(str_shuffle("0123456789"), 0, 2);
 $randomPin = substr(str_shuffle("0123456789"), 0, 4);
   
 $hashed_password = password_hash($randomPin, PASSWORD_DEFAULT);
 
-    
+  $_SESSION["randBank"]= $randomBankID;
+  $_SESSION["randPin"]= $randomPin;
+
+var_dump($hashed_password);
+
 $stmt = $db->prepare("INSERT INTO userdata(fullName, bankID, pinCode) VALUES (:fullName, :bankID, :pinCode)");
 
 $stmt->bindValue(':fullName', $_POST['fullName']);
@@ -49,13 +60,16 @@ $stmt->bindValue(':pinCode', $hashed_password);
 
 $stmt->execute();
 
-header('Location: atm.php');
+header("Location: naReg.php");
+
 }
 
 
 
-
 function login(){
+include 'connect.php';
+include 'begin.php';
+
 
 $bankID = $_POST['UserInfo'];
 $pincode = $_POST['Pin'];
@@ -67,13 +81,18 @@ $stmt->execute(array(':bankID' => $bankID));
 if($row = $stmt->fetch()){
     $id = $row['id'];
     $hashed_password = $row['pinCode'];
-    $voornaam = $row['fullName'];
+    $naam = $row['fullName'];
+    $bankBalance = $row['bankBalance'];
 
         if (password_verify($pincode, $hashed_password)){
             $_SESSION['id'] = $id;
             $_SESSION['bankID'] = $bankID;
+            $_SESSION['naam'] = $naam;
+            $_SESSION['saldo'] = $bankBalance;
 
-            header("Location: atm.php");
+
+
+            header("Location: opneem.php");
         }
         else {
             echo "You have entered an invalid Pincode";
@@ -82,10 +101,6 @@ if($row = $stmt->fetch()){
 else {
     echo "You have entered an invalid ID";
 }
-
-
-
-header('Location: opneem.php');
     
 }
 
