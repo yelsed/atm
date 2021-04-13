@@ -11,7 +11,7 @@ function registro(){
 include 'connect.php';
 include 'begin.php';
 
-
+if(isset($_POST["fullName"]) && isset($_POST["dropdownie"])){
 $eigenInput = $_POST['dropdownie'];
 switch($eigenInput){
     case 'ING':
@@ -57,11 +57,29 @@ $stmt->bindValue(':bankID', $randomBankID);
 
 $stmt->bindValue(':pinCode', $hashed_password);
 
-
 $stmt->execute();
 
 header("Location: naReg.php");
+}else{
 
+echo '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Failure</title>
+</head>
+<body>
+<p>Something went wrong with the registration.</p>
+<a href="destroy.php">
+  <button id="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
+</a>
+</body>
+</html>';
+
+//    header('Location: atm.php');
+}
 }
 
 
@@ -103,6 +121,8 @@ else {
 }
     
 }
+
+
 
 if(isset($_POST['login'])){
     login();

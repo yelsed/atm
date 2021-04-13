@@ -2,14 +2,7 @@
 include 'waarnaartoe.php';
 include 'begin.php';
 echo $_SESSION['id'];
-echo $_SESSION['naam'];
-echo $_SESSION['saldo'];
-
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +16,15 @@ echo $_SESSION['saldo'];
 </head>
 
 <body>
+<?php if(!isset($_SESSION['id'])): ?>
 
+<p>LOGIN FAILED</p>
 
+<a href="destroy.php">
+  <button id="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
+</a>
 <br>
-
+<?php else : ?>
   <form action="" method="POST" name="loginForm">
     <input type="text" id="WithdrawPlace" name="WithdrawHolder">
   </form>
@@ -48,28 +46,26 @@ echo $_SESSION['saldo'];
 
   </div>
   <br>
-  <a href="destroy.php">
-  <button id="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
-</a>
-<!-- . IS NAAM -->
-<!-- # IS ID -->
-	
+  
+  <button id="quit" name ="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
   <div id="DIVgif"></div>
-
 
 </body>
 </html>
-
     <!-- Keypad script -->
 <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
+var saldo='<?php echo $_SESSION["saldo"];?>';
 var input = 0;
+if(saldo < 10){
+  $('#WithdrawPlace').val("You don't have enough moneyBills to withdraw.");
+
+}else{
 
 $('.controlButton').on('click',function() {
-  console.log(this.id);
-
+  
   switch(this.id){
     case 'ten': 
     input += 10;
@@ -101,9 +97,18 @@ $('.controlButton').on('click',function() {
     break;
 
     case 'cur_balance':
-    
+      
+        console.log(myvar);
+      $('#WithdrawPlace').val("You have got this much euros left: €" + myvar + ",-");
+
     break;
 
+    case 'quit':
+      localStorage.clear();
+      sessionStorage.clear();
+      sessionStorage.removeItem('id'); 
+      location.replace('atm.php');
+    break;
   
 }
 })
@@ -135,20 +140,24 @@ function withDraw(input){
         newGif.src = "media/normaal.gif";
     }
     
-    console.log(tijd);
 
     setTimeout(function(){ 
-      // $('.notice').fadeIn().idle(2000).fadeOut('slow');
-      location.reload()
       
-     }, tijd);
-    
-    
-    
+      location.replace("destroy.php");
+      
+     }, tijd);  
+}
+}
+
+function moneyBillsAction(){
+
+
+}
+
+function curBalance(){
+
 }
 
 </script>
 
-<?php
-
-
+<?php endif; ?>

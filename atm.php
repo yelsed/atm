@@ -65,7 +65,7 @@ $("#registreren_form_div").hide();
 $('#toRegister').on('click', function(){
     $("#registreren_form_div").show();
     $("#login_form_div").hide();
-    console.log("hello");
+    // console.log("hello");
 })
 
 $('#toLogin').on('click', function(e){
@@ -108,6 +108,9 @@ $('.login').on('click', function(e){
         }
     });
 });
+
+
+
 </script>
 
 <?php
