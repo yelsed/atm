@@ -25,8 +25,14 @@ echo $_SESSION['id'];
 </a>
 <br>
 <?php else : ?>
-  <form action="" method="POST" name="loginForm">
-    <input type="text" id="WithdrawPlace" name="WithdrawHolder">
+  <form action="geld.php" method="POST" name="geld">
+    <input type="text" id="WithdrawPlace" name="WithdrawHolder" readonly>
+    <button id="withdraw" class="controlButton clickable" data-state="withdraw">Withdraw</button>
+
+    <input type="hidden" id="stuurOp" name="stuurOp">
+    <input type="hidden" id="input" name="input">
+
+
   </form>
 
 <br>
@@ -41,14 +47,13 @@ echo $_SESSION['id'];
     <button id="ahundo" class="controlButton clickable" data-state="100">100</button>
     <br><br>
 
-    <button id="withdraw" class="controlButton clickable" data-state="withdraw">Withdraw</button>
     <button id="cur_balance" class="controlButton clickable" data-state="balance">Current Balance</button>
 
   </div>
   <br>
-  
-  <button id="quit" name ="quit" class="controlButton clickable" data-state="quit">Kwit :)</button>
-  <div id="DIVgif"></div>
+  <a href="destroy.php">
+  <button id="quit"  class="controlButton clickable" data-state="quit">Kwit :)</button>
+  </a>
 
 </body>
 </html>
@@ -59,35 +64,33 @@ echo $_SESSION['id'];
 
 var saldo='<?php echo $_SESSION["saldo"];?>';
 var input = 0;
+
 if(saldo < 10){
   $('#WithdrawPlace').val("You don't have enough moneyBills to withdraw.");
-
+  $("#buttons").hide();
 }else{
 
 $('.controlButton').on('click',function() {
   
   switch(this.id){
     case 'ten': 
+    console.log(this.id);
     input += 10;
-    console.log(input);
     $('#WithdrawPlace').val(input);
     break;
 
     case 'twenty':
     input += 20;
-    console.log(input);
     $('#WithdrawPlace').val(input);
     break;
 
     case 'fifty':
     input += 50;
-    console.log(input);
     $('#WithdrawPlace').val(input);
     break;
 
     case 'ahundo':
     input += 100;
-    console.log(input);
     $('#WithdrawPlace').val(input);
     break;
 
@@ -97,67 +100,37 @@ $('.controlButton').on('click',function() {
     break;
 
     case 'cur_balance':
-      
-        console.log(myvar);
-      $('#WithdrawPlace').val("You have got this much euros left: €" + myvar + ",-");
-
-    break;
-
-    case 'quit':
-      localStorage.clear();
-      sessionStorage.clear();
-      sessionStorage.removeItem('id'); 
-      location.replace('atm.php');
+    var functie='<?php  opneem();?>';
+    // console.log(functie);
+    $('#WithdrawPlace').val("You have got this much euros left: €" + saldo + ",-");
     break;
   
 }
-})
+});
 
 function withDraw(input){
-  $("#buttons").hide()
-  var newGif = document.createElement('img') ;
-			document.getElementById('DIVgif').appendChild(newGif);
-            newGif.id = "test";
-        $('#' + newGif.id).attr('style','height:400px;width:400px;') ;
-            
-    var tijd = 0;
-
-    if(input == 0){
-        tijd += 4000
-        newGif.src = "media/simpsons.gif";
-        $('#WithdrawPlace').val("Maybe you should actually withdraw sumfin Laddddd");
-    }else if(input == 420){
-        tijd += 4200;
-        $('#WithdrawPlace').val("You've withdrawn: €" + input + ",-");
-        newGif.src = "media/ziek.gif";
-    } else if(input >= 1000){
-        tijd += 10000;
-        $('#WithdrawPlace').val("You've withdrawn: €" + input + ",-");
-        newGif.src = "media/money-to-blow.gif";
-    } else{
-        tijd += 5000;
-        $('#WithdrawPlace').val("You've withdrawn: €" + input + ",-");
-        newGif.src = "media/normaal.gif";
-    }
+  $("#buttons").hide();
+ 
+    moneyBillsAction(input);
     
-
-    setTimeout(function(){ 
-      
-      location.replace("destroy.php");
-      
-     }, tijd);  
-}
+     
 }
 
-function moneyBillsAction(){
+
+function moneyBillsAction(x){
+
+  uitkomst = saldo - x;
+
+  $('#stuurOp').val(uitkomst);
+  $('#input').val(x);
 
 
-}
-
-function curBalance(){
+  console.log(uitkomst);
 
 }
 
+
+}
 </script>
 
 <?php endif; ?>

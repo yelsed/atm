@@ -62,10 +62,10 @@
 
 
 $("#registreren_form_div").hide();
+
 $('#toRegister').on('click', function(){
     $("#registreren_form_div").show();
     $("#login_form_div").hide();
-    // console.log("hello");
 })
 
 $('#toLogin').on('click', function(e){
@@ -76,46 +76,39 @@ $('#toLogin').on('click', function(e){
 
 
 $('.register').on('click', function(e){
+    
+    // $(".registerForm").submit();
+    // var a=$('.registerForm').serialize();
+    // $.ajax({
+    //     method:'post',
+    //     url:'waarnaartoe.php',
+    //     data:a,
+    //     beforeSend:function(){
+    //         launchpreloader();
+    //     },
+    //     complete:function(){
+    //         stopPreloader();
+    //     },
+    //     success:function(result){
+    //         alert(result);
+    //     }
+    // });
 
-    var myForm = new FormData(this);
 
-    $.ajax({
-        url:"waarnaartoe.php",
-        method:"post",
-        data: myForm,
-        contentType:false,
-        processData:false,
-        success:function(){
-            console.log(data);
-        }
-    });
 });
+
 
 // Login
 $('.login').on('click', function(e){
 
-    var myForm = new FormData(this);
+    
+    
+    // $(".loginForm").submit();
 
-    $.ajax({
-        url:"waarnaartoe.php",
-        method:"post",
-        data: myForm,
-        contentType:false,
-        processData:false,
-        success:function(){
-            console.log(data);
-            //function
-        }
-    });
+
 });
-
-
 
 </script>
 
-<?php
-
-
-?>
 
 
