@@ -31,6 +31,12 @@ echo $_SESSION['id'];
 
     <input type="hidden" id="stuurOp" name="stuurOp">
     <input type="hidden" id="input" name="input">
+    <input type="hidden" id="money10" name="money10">
+    <input type="hidden" id="money20" name="money20">
+    <input type="hidden" id="money50" name="money50">
+    <input type="hidden" id="money100" name="money100">
+    <input type="hidden" id="saldo" name="saldo">
+
 
 
   </form>
@@ -64,10 +70,15 @@ echo $_SESSION['id'];
 
 var saldo='<?php echo $_SESSION["saldo"];?>';
 var input = 0;
+var money10 = 0;
+var money20 = 0;
+var money50 = 0;
+var money100 = 0;
 
 if(saldo < 10){
   $('#WithdrawPlace').val("You don't have enough moneyBills to withdraw.");
   $("#buttons").hide();
+  $('#withdraw').hide();
 }else{
 
 $('.controlButton').on('click',function() {
@@ -76,53 +87,60 @@ $('.controlButton').on('click',function() {
     case 'ten': 
     console.log(this.id);
     input += 10;
+    money10 += 1;
     $('#WithdrawPlace').val(input);
     break;
 
     case 'twenty':
     input += 20;
+    money20 += 1;
     $('#WithdrawPlace').val(input);
     break;
 
     case 'fifty':
     input += 50;
+    money50 += 1;
     $('#WithdrawPlace').val(input);
     break;
 
     case 'ahundo':
     input += 100;
+    money100 += 1;
     $('#WithdrawPlace').val(input);
     break;
-
+    
     case 'withdraw':
-    withDraw(input);
+    withDraw(input,money10, money20,money50,money100);
     input = 0;
     break;
 
     case 'cur_balance':
-    var functie='<?php  opneem();?>';
-    // console.log(functie);
     $('#WithdrawPlace').val("You have got this much euros left: €" + saldo + ",-");
     break;
   
 }
 });
 
-function withDraw(input){
+function withDraw(input,money10, money20,money50,money100){
   $("#buttons").hide();
  
-    moneyBillsAction(input);
+    moneyBillsAction(input,money10,money20,money50,money100);
     
      
 }
 
 
-function moneyBillsAction(x){
+function moneyBillsAction(x,money10, money20,money50,money100){
 
   uitkomst = saldo - x;
 
   $('#stuurOp').val(uitkomst);
   $('#input').val(x);
+  $('#money10').val(money10);
+  $('#money20').val(money20);
+  $('#money50').val(money50);
+  $('#money100').val(money100);
+  $('#saldo').val(saldo);
 
 
   console.log(uitkomst);

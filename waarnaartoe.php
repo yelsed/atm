@@ -29,8 +29,6 @@ switch($eigenInput){
         break;
     }
 
-
-
 $randomBankID = "NL".  substr(str_shuffle("0123456789"), 0, 2) . $bankKeuze . substr(str_shuffle("0123456789"), 0, 4)  . substr(str_shuffle("0123456789"), 0, 4)  .  substr(str_shuffle("0123456789"), 0, 2);
 $randomPin = substr(str_shuffle("0123456789"), 0, 4);
   
@@ -110,33 +108,6 @@ else {
     
 }
 
-
-function opneem(){
-include 'connect.php';
-
-$stmt = $db->prepare("SELECT * FROM moneyBills");
-$stmt->execute();
-
-    if($row = $stmt->fetch()){
-        $money10 =  $row['10'];
-        $money20 =  $row['20'];
-        $money50 =  $row['50'];
-        $money100 = $row['100'];
-    }
-    if($money10 <= 0){
-    
-    }
-    if($money20 <= 0){
-
-    } 
-    if($money50 <= 0){
-
-    } 
-    if($money100 <= 0){
-
-    }  
-
-}
 
 if(isset($_POST['login'])){
     login();
