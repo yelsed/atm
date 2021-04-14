@@ -4,7 +4,7 @@ include "waarnaartoe.php";
 
 
 if(isset($_SESSION["randBank"]) && isset($_SESSION["randPin"])){
-echo "Dit is uw Account code: " . $_SESSION["randBank"] . "<br>" . "Dit is uw pincode: " . $_SESSION['randPin'] . "<br> Zorg ervoor dat u het niet vergeet, deze informatie is niet makkelijk terug te vinden in verband met veiligheids overwegingen.";
+echo "this is uw Account code: " . $_SESSION["randBank"] . "<br>" . "this is uw pincode: " . $_SESSION['randPin'] . "<br> Zorg ervoor dat u het niet forget, deze informatie is niet easy terug te finden in verband met safety regulations.";
 
 session_destroy();
 }else{

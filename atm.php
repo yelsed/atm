@@ -77,23 +77,7 @@ $('#toLogin').on('click', function(e){
 
 $('.register').on('click', function(e){
     
-    // $(".registerForm").submit();
-    // var a=$('.registerForm').serialize();
-    // $.ajax({
-    //     method:'post',
-    //     url:'waarnaartoe.php',
-    //     data:a,
-    //     beforeSend:function(){
-    //         launchpreloader();
-    //     },
-    //     complete:function(){
-    //         stopPreloader();
-    //     },
-    //     success:function(result){
-    //         alert(result);
-    //     }
-    // });
-
+ 
 
 });
 
@@ -102,10 +86,7 @@ $('.register').on('click', function(e){
 $('.login').on('click', function(e){
 
     
-    
-    // $(".loginForm").submit();
-
-
+   
 });
 
 </script>

@@ -132,18 +132,17 @@ if(hoeveelmagik < geld){
         console.log(op);
 
         if(op == 10){
-            $("#DIVgif").hide();
-            $('#hoeveelheid').val("De tientjes zijn op g");
+            newGif.src = "media/pog.gif";
+            $('#hoeveelheid').val("Noooooooo, we don't have any 10zos left");
             console.log(op);
-
         }else if(op == 20){
             newGif.src = "media/pog.gif";
             $('#hoeveelheid').val("Hello , no more twenties for you ");
         }else if(op == 50){
-            $("#DIVgif").hide();
+            newGif.src = "media/pog.gif";
             $('#hoeveelheid').val("No more fifties son");
         }else if(op == 100){
-            $("#DIVgif").hide();
+            newGif.src = "media/pog.gif";
             $('#hoeveelheid').val("No more hundossssssssss");
         }
     }
